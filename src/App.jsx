@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./App.css";
+const API_URL = "https://backend-hpfp54r8s-chelinvs-projects.vercel.app/api/modelos";
+
 
 const App = () => {
   const [modelos, setModelos] = useState([]);
@@ -17,12 +19,13 @@ const App = () => {
 
   const fetchModelos = async () => {
     try {
-      const response = await axios.get("https://backend-hpfp54r8s-chelinvs-projects.vercel.app/api/modelos");
+      const response = await axios.get(API_URL);
       setModelos(response.data);
     } catch (error) {
-      console.error("Error al obtener modelos", error);
+      console.error("Error al obtener modelos:", error.response?.data || error.message);
     }
   };
+  
 
   const calcularPrecioVenta = (tipo, talla, costoTela, cantidad) => {
     let metrosTela = tipo === "A" ? 1.5 : 1.8;
@@ -54,13 +57,13 @@ const App = () => {
       parseFloat(formData.costoTela),
       parseInt(formData.cantidad)
     );
+  
     try {
-      await axios.post("https://backend-hpfp54r8s-chelinvs-projects.vercel.app/api/modelos", { ...formData, precioVenta, ganancia: gananciaTotal });
+      await axios.post(API_URL, { ...formData, precioVenta, ganancia: gananciaTotal });
       fetchModelos();
-      setFormData({ tipo: "A", talla: "30", costoTela: "", cantidad: "" });
     } catch (error) {
-      console.error("Error al agregar modelo", error);
-    }
+      console.error("Error al agregar modelo:", error.response?.data || error.message);
+    }
   };
 
   return (
