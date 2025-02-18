@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./App.css";
-const API_URL = "https://backend-hpfp54r8s-chelinvs-projects.vercel.app/api/modelos";
+const API_URL = "https://backend-seven-dun-42.vercel.app/api/modelos";
 
 
 const App = () => {
