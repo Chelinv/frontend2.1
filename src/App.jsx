@@ -17,7 +17,7 @@ const App = () => {
 
   const fetchModelos = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/modelos");
+      const response = await axios.get("https://backend-hpfp54r8s-chelinvs-projects.vercel.app/api/modelos");
       setModelos(response.data);
     } catch (error) {
       console.error("Error al obtener modelos", error);
@@ -55,7 +55,7 @@ const App = () => {
       parseInt(formData.cantidad)
     );
     try {
-      await axios.post("http://localhost:5000/api/modelos", { ...formData, precioVenta, ganancia: gananciaTotal });
+      await axios.post("https://backend-hpfp54r8s-chelinvs-projects.vercel.app/api/modelos", { ...formData, precioVenta, ganancia: gananciaTotal });
       fetchModelos();
       setFormData({ tipo: "A", talla: "30", costoTela: "", cantidad: "" });
     } catch (error) {
